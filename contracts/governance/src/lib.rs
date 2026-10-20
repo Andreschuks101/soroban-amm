@@ -3715,11 +3715,11 @@ mod tests {
         let multisig = Address::generate(&s.env);
         gov.set_veto_multisig(&multisig);
 
-        let (version, data): (u32, (Address,)) =
+        let (version, data): (u32, (Option<Address>, Address)) =
             last_versioned_event(&s, &gov, "veto_multisig_set");
         assert_eq!(version, soroban_amm_sdk::EVENT_SCHEMA_VERSION);
         assert_eq!(version, 1);
-        assert_eq!(data, (multisig,));
+        assert_eq!(data, (None, multisig));
     }
 
     // ── Issue #824: missing-proposal reads return a typed error, not a trap ───
